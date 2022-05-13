@@ -2,6 +2,8 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const userRoute = require('./routes/users/user');
+const authRoute = require('./routes/auths/auth');
+app.use(express.json());
 const dotenv = require('dotenv');
 dotenv.config();
 
@@ -18,7 +20,11 @@ mongoose.connect(process.env.DB_URL, {useNewUrlParser: true}).then(() =>
 
 //routes
     app.use('/api/user', userRoute);
+    app.use('/api/auth', authRoute);
 ///
+
+app.use(express.urlencoded({extended: true}));
+
 
 
 app.listen(PORT, ()=>{
