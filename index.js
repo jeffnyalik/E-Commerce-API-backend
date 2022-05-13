@@ -1,20 +1,24 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
+const userRoute = require('./routes/users/user');
+const dotenv = require('dotenv');
+dotenv.config();
 
 const PORT = 5000;
 
-//Database url 
-const dbUrl = 'mongodb://127.0.0.1:27017/ecommerceDB';
-//end
-
 //database connection
-mongoose.connect(dbUrl, {useNewUrlParser: true}).then(() =>
+mongoose.connect(process.env.DB_URL, {useNewUrlParser: true}).then(() =>
     console.log("database has been connected successfully")
 ).catch((error) =>{
     console.log(error);
 })
 //end db connection
+
+
+//routes
+    app.use('/api/user', userRoute);
+///
 
 
 app.listen(PORT, ()=>{
