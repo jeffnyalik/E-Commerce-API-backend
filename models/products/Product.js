@@ -19,6 +19,10 @@ const ProductSchema = new mongoose.Schema(
         price: {
             type: Number, required: true
         },
+
+        img: {
+            type: String
+        }
     },
     {timestamps: true}
 )
